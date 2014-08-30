@@ -12,10 +12,9 @@
 			<h:inputText id="nome" value="#{produtoView.model.nome}" />
 			<p:message for="nome" />
 			<h:outputLabel value="Tipo" />
-			<p:selectOneMenu id="tipo" value="#{produtoView.model.tipo}"
-				converter="tipo">
+			<p:selectOneMenu id="tipo" value="#{produtoView.idTipo}">
 				<f:selectItems value="#{tipoView.listar()}" var="tipo"
-					itemLabel="#{tipo.nome}" itemValue="#{tipo}" />
+					itemLabel="#{tipo.nome}" itemValue="#{tipo.id}" />
 			</p:selectOneMenu>
 			<p:message for="tipo" />
 

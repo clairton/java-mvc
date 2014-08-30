@@ -34,6 +34,11 @@ public abstract class AbstractController<T extends AbstractModel> implements
 		em.remove(em.find(model.getClass(), model.getId()));
 	}
 
+	@SuppressWarnings("unchecked")
+	public <Y> T pesquisar(Y id) {
+		return (T) em.find(novo().getClass(), id);
+	}
+
 	public List<T> listar() {
 		CriteriaBuilder cb = em.getCriteriaBuilder();
 		@SuppressWarnings("unchecked")

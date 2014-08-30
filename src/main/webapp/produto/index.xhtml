@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:p="http://primefaces.org/ui">
+<h:head />
+<h:body>
+	<h:form id="form">
+		<p:messages />
+		<p:panelGrid columns="3">
+			<h:outputLabel value="Nome" />
+			<h:inputText id="nome" value="#{produtoView.model.nome}" />
+			<p:message for="nome" />
+			<h:outputLabel value="Tipo" />
+			<p:selectOneMenu id="tipo" value="#{produtoView.model.tipo}"
+				converter="tipo">
+				<f:selectItems value="#{tipoView.listar()}" var="tipo"
+					itemLabel="#{tipo.nome}" itemValue="#{tipo}" />
+			</p:selectOneMenu>
+			<p:message for="tipo" />
+
+			<p:commandButton action="#{produtoView.salvar()}" value="Salvar"
+				update="@form" process="@form" />
+			<p:commandButton action="#{produtoView.criar()}" value="Criar"
+				update="@form" process="@this" />
+			<p:commandButton action="#{produtoView.remover(produtoView.model)}"
+				value="Remover" update="@form" process="@this" />
+		</p:panelGrid>
+		<p:dataTable value="#{produtoView.listar()}" var="model">
+			<p:column>
+				<f:facet name="header">id</f:facet>
+				#{model.id}
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">nome</f:facet>
+				#{model.nome}
+			</p:column>
+
+			<p:column>
+				<f:facet name="header">tipo</f:facet>
+				#{model.tipo.nome}
+			</p:column>
+			<p:column>
+				<f:facet name="header">Opções</f:facet>
+				<p:commandButton update="@form"
+					action="#{produtoView.editar(model)}" process="@this"
+					value="Editar" />
+				<p:commandButton update="@form"
+					action="#{produtoView.remover(model)}" process="@this"
+					value="Remover" />
+			</p:column>
+		</p:dataTable>
+	</h:form>
+</h:body>
+</html>
